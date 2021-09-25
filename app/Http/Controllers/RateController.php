@@ -71,6 +71,7 @@ class RateController extends Controller
                     ->orderBy($request->get('order'), $request->get('sort'))
                     ->paginate($request->get('pageSize'));
             } catch (\Throwable $th) {
+                return $th;
                 return response()
                     ->json([
                         'success' => false,
