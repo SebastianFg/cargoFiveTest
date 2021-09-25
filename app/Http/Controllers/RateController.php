@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\rate;
+use App\Rate;
 use Illuminate\Http\Request;
 
 class RateController extends Controller
