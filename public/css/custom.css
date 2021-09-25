@@ -1,0 +1,38 @@
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield}; 
+
+
+.sinBordes{
+   border:0px !important;
+   border-bottom:2px solid #eee;
+}
+.btnLogin{
+	border-radius: 10px;
+	outline:none;
+}
+.imgLogin{
+	max-width: 500px;
+	max-height: 350px;
+	height: 150px;
+}
+
+.cursorPointer{
+    cursor: pointer;
+}
+.inputInformacion{
+	border:0;
+	outline: none;
+	background: none !important;
+}
+
+.footerRight{
+	text-align: right
+}
+
+
+
