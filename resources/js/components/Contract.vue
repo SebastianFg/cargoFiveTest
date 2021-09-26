@@ -319,7 +319,7 @@ export default {
                                             {
                                               Swal.fire({
                                                     title: 'Error!',
-                                                    text: 'Verifique el archivo que esta enviado y vuelva a intentar',
+                                                    text: 'Verifique el archivo enviado y vuelva a intentar.',
                                                     icon: 'error',
                                                     confirmButtonText: 'Aceptar'
                                                   });
