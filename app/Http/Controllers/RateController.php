@@ -10,37 +10,13 @@ class RateController extends Controller
 
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\rate  $rate
-     * @return \Illuminate\Http\Response
-     */
-    public function show(rate $rate)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\rate  $rate
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, rate $rate)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\rate  $rate
      * @return \Illuminate\Http\Response
      */
-    public function getRateByContract($contract_id,Request $request)
-    {
-        ;
+    public function getRateByContract($contract_id, Request $request)
+    {;
         if ($contract_id == null) {
             return response()
                 ->json([
@@ -67,7 +43,7 @@ class RateController extends Controller
 
 
             try {
-                $rates = Rate::where('contract_id', $contract_id )
+                $rates = Rate::where('contract_id', $contract_id)
                     ->orderBy($request->get('order'), $request->get('sort'))
                     ->paginate($request->get('pageSize'));
             } catch (\Throwable $th) {

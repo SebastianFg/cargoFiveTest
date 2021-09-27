@@ -22,7 +22,7 @@ class ContractController extends Controller
      */
     public function index(Request  $request)
     {
-        return Contract::orderBy('id','desc')->paginate($request->get('per_page'));
+        return Contract::orderBy('id', 'desc')->paginate($request->get('per_page'));
     }
 
     /**
@@ -32,41 +32,40 @@ class ContractController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ContractRequest $request)
-    {   
-       
-        
-        $file_extension = array('xls','xlsx','xlsm','csv');
+    {
 
-        if(!in_array($request->file('file')->getClientOriginalExtension(),$file_extension)){
+
+        $file_extension = array('xls', 'xlsx', 'xlsm', 'csv');
+
+        if (!in_array($request->file('file')->getClientOriginalExtension(), $file_extension)) {
             return response()
-            ->json([
-                'success' => false,
-                'status' => 203,
-                'message' => "Solo se aceptar archivos excel (xls,xlsx,xlsm).",
-            ], 203);
+                ->json([
+                    'success' => false,
+                    'status' => 203,
+                    'message' => "Solo se aceptar archivos excel (xls,xlsx,xlsm).",
+                ], 203);
         }
 
         DB::beginTransaction();
 
-            try {
-                $contract = Contract::create([
-                    'nombre' => $request->get('name'),
-                    'fecha' => $request->get('date')
-                ]); 
-               
-                Excel::import(new RatesImport($contract->id), $request->file('file'));
+        try {
+            $contract = Contract::create([
+                'nombre' => $request->get('name'),
+                'fecha' => $request->get('date')
+            ]);
 
-            } catch (\Throwable $th) {
+            Excel::import(new RatesImport($contract->id), $request->file('file'));
+        } catch (\Throwable $th) {
 
-                DB::rollBack();
-                return response()
-                    ->json([
-                        'success' => false,
-                        'status' => 404,
-                        'message' => "Error al crear el contrato.",
-                    ], 404);
-            }
-            
+            DB::rollBack();
+            return response()
+                ->json([
+                    'success' => false,
+                    'status' => 404,
+                    'message' => "Error al crear el contrato.",
+                ], 404);
+        }
+
         DB::commit();
 
         return response()
@@ -75,39 +74,5 @@ class ContractController extends Controller
                 'status' => 201,
                 'message' => "Contrato y sus tarifas cargadas con éxito!.",
             ], 201);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Contract  $contract
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Contract $contract)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Contract  $contract
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Contract $contract)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Contract  $contract
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Contract $contract)
-    {
-        //
     }
 }
