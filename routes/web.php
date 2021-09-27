@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ArticuloController;
 use Illuminate\Support\Facades\Route;
 
 /*
